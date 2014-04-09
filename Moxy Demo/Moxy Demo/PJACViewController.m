@@ -7,10 +7,13 @@
 //
 
 #import "PJACViewController.h"
+#import "PJACTableViewCell.h"
+#import "PJACResponseObject.h"
 
 @interface PJACViewController () <UITableViewDataSource,UITableViewDelegate>
 - (IBAction)buttonPressed:(UIButton *)sender;
 @property (strong, nonatomic) NSMutableArray *responses;
+- (IBAction)clearOutTheData:(id)sender;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
 
@@ -24,11 +27,42 @@
     
     return _responses;
 }
+
+- (IBAction)clearOutTheData:(id)sender
+{
+    [self.tableView.visibleCells enumerateObjectsUsingBlock:^(PJACTableViewCell *cell, NSUInteger idx, BOOL *stop) {
+        
+        cell.hasTransformed = NO;
+        [UIView animateWithDuration:.7f
+                         animations:^{
+                             cell.alpha = 0.0f;
+                         } completion:^(BOOL finished) {
+                             if (finished) {
+                                 if (idx == self.responses.count - 1) {
+                                     NSLog(@"Runnin");
+                                     [self.responses removeAllObjects];
+                                     [self.tableView reloadData];
+                                 }
+                             }
+                         }];
+
+    }];
+
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+}
 - (void)buttonPressed:(UIButton *)sender
 {
+    PJACResponseObject *resposneObject = [[PJACResponseObject alloc] init];
+    
     NSURL *baseUrl = [NSURL URLWithString:@"http://192.168.1.92:3000"];
     
     NSURL *requestUrl = [NSURL URLWithString:@"" relativeToURL:baseUrl];
+    resposneObject.serverNumber = sender.tag;
     
     NSMutableURLRequest *apiRequest = [NSMutableURLRequest requestWithURL:requestUrl];
     
@@ -40,18 +74,54 @@
                                
                                NSString *json = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                                
-                               [self.responses addObject:json];
+                               resposneObject.responseText = json;
                                
-                               [self.tableView reloadData];
-
+                               [self.responses addObject:resposneObject];
+                               
+                               NSIndexPath *cellIndex = [NSIndexPath indexPathForRow:self.responses.count - 1 inSection:0];
+                               
+                               [self.tableView insertRowsAtIndexPaths:@[cellIndex] withRowAnimation:UITableViewRowAnimationFade];
+                               
                            }];
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    PJACTableViewCell *theCell = (PJACTableViewCell *)cell;
+    
+    if (!theCell.hasTransformed) {
+        theCell.transform = CGAffineTransformMakeTranslation(0, 300);
+        [UIView animateWithDuration:1.0f
+                         animations:^{
+                             theCell.transform = CGAffineTransformIdentity;
+                             theCell.hasTransformed = YES;
+                        
+                         }];
+    }
+
+
+    
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    PJACTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"responseCell"];
+    if (!cell) {
+        cell = [[PJACTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"responseCell"];
+    }
+    PJACResponseObject *currentObject = [self.responses objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = [self.responses objectAtIndex:indexPath.row];
+    cell.responseLabel.text = currentObject.responseText;
+    UIColor *color;
+    if (currentObject.serverNumber == 1) {
+        color = [UIColor redColor];
+    } else if (currentObject.serverNumber == 2){
+        color = [UIColor greenColor];
+    } else {
+        color = [UIColor purpleColor];
+    }
+    cell.backgroundColor = color;
+    
+    
     
     return cell;
 }
@@ -60,4 +130,5 @@
 {
     return self.responses.count;
 }
+
 @end

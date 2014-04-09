@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD09087118F60F9B009F5F32 /* PJACTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD09087018F60F9B009F5F32 /* PJACTableViewCell.m */; };
+		BD09087418F61220009F5F32 /* PJACResponseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BD09087318F61220009F5F32 /* PJACResponseObject.m */; };
 		D01549A318F5FC72008E7F25 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D01549A218F5FC72008E7F25 /* Foundation.framework */; };
 		D01549A518F5FC72008E7F25 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D01549A418F5FC72008E7F25 /* CoreGraphics.framework */; };
 		D01549A718F5FC72008E7F25 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D01549A618F5FC72008E7F25 /* UIKit.framework */; };
@@ -34,6 +36,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BD09086F18F60F9B009F5F32 /* PJACTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJACTableViewCell.h; sourceTree = "<group>"; };
+		BD09087018F60F9B009F5F32 /* PJACTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJACTableViewCell.m; sourceTree = "<group>"; };
+		BD09087218F61220009F5F32 /* PJACResponseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJACResponseObject.h; sourceTree = "<group>"; };
+		BD09087318F61220009F5F32 /* PJACResponseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJACResponseObject.m; sourceTree = "<group>"; };
 		D015499F18F5FC72008E7F25 /* Moxy Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Moxy Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D01549A218F5FC72008E7F25 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D01549A418F5FC72008E7F25 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -117,6 +123,10 @@
 				D01549B418F5FC72008E7F25 /* Main.storyboard */,
 				D01549B718F5FC72008E7F25 /* PJACViewController.h */,
 				D01549B818F5FC72008E7F25 /* PJACViewController.m */,
+				BD09087218F61220009F5F32 /* PJACResponseObject.h */,
+				BD09087318F61220009F5F32 /* PJACResponseObject.m */,
+				BD09086F18F60F9B009F5F32 /* PJACTableViewCell.h */,
+				BD09087018F60F9B009F5F32 /* PJACTableViewCell.m */,
 				D01549BA18F5FC72008E7F25 /* Images.xcassets */,
 				D01549A918F5FC72008E7F25 /* Supporting Files */,
 			);
@@ -251,8 +261,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D01549B318F5FC72008E7F25 /* PJACAppDelegate.m in Sources */,
+				BD09087418F61220009F5F32 /* PJACResponseObject.m in Sources */,
 				D01549B918F5FC72008E7F25 /* PJACViewController.m in Sources */,
 				D01549AF18F5FC72008E7F25 /* main.m in Sources */,
+				BD09087118F60F9B009F5F32 /* PJACTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
