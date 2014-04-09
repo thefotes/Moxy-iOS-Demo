@@ -9,6 +9,8 @@
 #import "PJACViewController.h"
 
 @interface PJACViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *responseLabel;
+
 - (IBAction)buttonPressed:(UIButton *)sender;
 @end
 
@@ -29,7 +31,7 @@
                                
                                NSString *json = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 
-                               NSLog(@"%@", json);
+                               self.responseLabel.text = json;
                            }];
 }
 @end
