@@ -9,21 +9,12 @@
 #import "PJACViewController.h"
 
 @interface PJACViewController ()
-
+- (IBAction)buttonPressed:(UIButton *)sender;
 @end
 
 @implementation PJACViewController
-
-- (void)viewDidLoad
+- (void)buttonPressed:(UIButton *)sender
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    NSLog(@"Button: %d", sender.tag);
 }
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 @end
