@@ -39,7 +39,6 @@
                          } completion:^(BOOL finished) {
                              if (finished) {
                                  if (idx == self.responses.count - 1) {
-                                     NSLog(@"Runnin");
                                      [self.responses removeAllObjects];
                                      [self.tableView reloadData];
                                  }
@@ -59,7 +58,7 @@
 {
     PJACResponseObject *resposneObject = [[PJACResponseObject alloc] init];
     
-    NSURL *baseUrl = [NSURL URLWithString:@"http://192.168.1.92:3000"];
+    NSURL *baseUrl = [NSURL URLWithString:@"http://10.221.1.203:3000"];
     
     NSURL *requestUrl = [NSURL URLWithString:@"" relativeToURL:baseUrl];
     resposneObject.serverNumber = sender.tag;
@@ -90,12 +89,13 @@
     PJACTableViewCell *theCell = (PJACTableViewCell *)cell;
     
     if (!theCell.hasTransformed) {
-        theCell.transform = CGAffineTransformMakeTranslation(0, 300);
-        [UIView animateWithDuration:1.0f
+        CGAffineTransform translate = CGAffineTransformMakeTranslation(0, 300);
+        CGAffineTransform skew = CGAffineTransformMake(1.f, 0.f, -0.5f, 1.0f, 0.f, 0.f);
+        theCell.transform = CGAffineTransformConcat(skew, translate);
+        [UIView animateWithDuration:0.7f
                          animations:^{
                              theCell.transform = CGAffineTransformIdentity;
                              theCell.hasTransformed = YES;
-                        
                          }];
     }
 
@@ -115,13 +115,12 @@
     if (currentObject.serverNumber == 1) {
         color = [UIColor redColor];
     } else if (currentObject.serverNumber == 2){
-        color = [UIColor greenColor];
+        color = [UIColor blueColor];
     } else {
         color = [UIColor purpleColor];
     }
     cell.backgroundColor = color;
-    
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
