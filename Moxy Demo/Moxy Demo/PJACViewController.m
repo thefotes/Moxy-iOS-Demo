@@ -60,7 +60,7 @@
     
     NSURL *baseUrl = [NSURL URLWithString:@"http://10.221.1.203:3000"];
     
-    NSURL *requestUrl = [NSURL URLWithString:@"" relativeToURL:baseUrl];
+    NSURL *requestUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%d", sender.tag] relativeToURL:baseUrl];
     resposneObject.serverNumber = sender.tag;
     
     NSMutableURLRequest *apiRequest = [NSMutableURLRequest requestWithURL:requestUrl];
